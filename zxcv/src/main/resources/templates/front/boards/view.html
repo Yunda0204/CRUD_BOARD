@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+    <h1 th:text="${board.subject}"></h1>
+    <div>
+        <p><strong th:text="#{작성자}"></strong>: <span th:text="${board.poster}"></span></p>
+        <p><strong th:text="#{내용}"></strong>: <span th:text="${board.content}"></span></p>
+    </div>
+    <div>
+        <a th:href="@{/boards/edit/{id}(id=${board.seq})}" th:text="#{수정}"></a>
+        <a th:href="@{/boards/delete/{id}(id=${board.seq})}" th:text="#{삭제}"></a>
+        <a th:href="@{/boards}" th:text="#{목록으로}"></a>
+    </div>
+</main>
+</html>

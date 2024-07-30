@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+    <h1 th:text="#{게시판목록}"></h1>
+    <table>
+    <a th:href="@{/boards/new}" th:text="#{새게시글작성}"></a>
+        <thead>
+        <tr>
+            <th th:text="#{제목}"></th>
+            <th th:text="#{작성자}"></th>
+            <th th:text="#{내용}"></th>
+            <th th:text="#{수정}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board : ${boards}">
+            <td>
+                <a th:text="${board.subject}" th:href="@{/boards/{id}(id=${board.seq})}"></a>
+            </td>
+            <td th:text="${board.seq}"></td>
+            <td th:text="${board.poster}"></td>
+            <td th:text="${board.content}"></td>
+            <td>
+                <a th:href="@{/boards/edit/{id}(id=${board.seq})}" th:text="#{수정}"></a>
+                <a th:href="@{/boards/delete/{id}(id=${board.seq})}" th:text="#{삭제}"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</html>

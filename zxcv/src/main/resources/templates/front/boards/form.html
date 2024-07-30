@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+
+<main layout:fragment="content">
+    <h1 th:text="${#strings.isEmpty(requestBoard.seq) ? '게시글 만들기' : '게시글 수정'}">Board Form</h1>
+    <form th:action="@{/boards}" th:object="${requestBoard}" method="post">
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+
+        <dl>
+            <dt th:text="#{작성자}"></dt>
+            <dd>
+                <input type="text" name="poster" th:field="*{poster}">
+                <div class="error" th:each="err : ${#fields.errors('poster')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt th:text="#{제목}"></dt>
+            <dd>
+                <input type="text" name="subject" th:field="*{subject}">
+                <div class="error" th:each="err : ${#fields.errors('subject')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt th:text="#{내용}"></dt>
+            <dd>
+                <textarea name="content" th:field="*{content}"></textarea>
+                <div class="error" th:each="err : ${#fields.errors('content')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <div class="buttons">
+            <button type="submit" th:text="${#strings.isEmpty(requestBoard.seq) ? '등록하기' : '수정하기'}"></button>
+            <button type="reset" th:text="#{다시입력}"></button>
+        </div>
+    </form>
+</main>
+</html>
