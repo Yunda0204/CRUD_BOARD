@@ -2,7 +2,6 @@ package qwer.asdf.services;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import qwer.asdf.controller.RequestBoard;
 import qwer.asdf.entities.Board;
@@ -34,5 +33,10 @@ public class BoardService {
 
     public void deletePostById(Long id) {
         boardRepository.deleteById(id);
+    }
+
+    public Board findPostById(Long id) { // 반환 타입 변경
+        return boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid board Id: " + id));
     }
 }
