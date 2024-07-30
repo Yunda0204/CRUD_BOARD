@@ -6,6 +6,7 @@
 <main layout:fragment="content">
     <h1 th:text="${#strings.isEmpty(requestBoard.seq) ? '게시글 만들기' : '게시글 수정'}">Board Form</h1>
     <form th:action="@{/boards}" th:object="${requestBoard}" method="post">
+        <input type="hidden" th:field="*{seq}">
         <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
         <dl>

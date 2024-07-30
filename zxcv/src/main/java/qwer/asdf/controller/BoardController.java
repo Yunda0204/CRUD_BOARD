@@ -7,15 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
 import qwer.asdf.entities.Board;
 import qwer.asdf.services.BoardService;
 
 import java.util.List;
-<<<<<<< HEAD
-import java.util.Optional;
-=======
->>>>>>> cc7c9ea (프로젝트 시작”)
 
 @Controller
 @RequestMapping("/boards")
@@ -43,7 +38,11 @@ public class BoardController {
         if (errors.hasErrors()) {
             return "front/boards/create";
         }
-        boardService.savePost(requestBoard);
+        if (requestBoard.getSeq() == null) {
+            boardService.savePost(requestBoard);
+        } else {
+            boardService.updatePost(requestBoard);
+        }
         return "redirect:/boards";
     }
 

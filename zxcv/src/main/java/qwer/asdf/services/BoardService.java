@@ -31,6 +31,15 @@ public class BoardService {
         return modelMapper.map(board, RequestBoard.class);
     }
 
+    public RequestBoard updatePost(RequestBoard requestBoard) {
+        Board existingBoard = boardRepository.findById(requestBoard.getSeq())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid board Id: " + requestBoard.getSeq()));
+        existingBoard.setPoster(requestBoard.getPoster());
+        existingBoard.setSubject(requestBoard.getSubject());
+        existingBoard.setContent(requestBoard.getContent());
+        boardRepository.save(existingBoard);
+        return modelMapper.map(existingBoard, RequestBoard.class);
+    }
     public void deletePostById(Long id) {
         boardRepository.deleteById(id);
     }
