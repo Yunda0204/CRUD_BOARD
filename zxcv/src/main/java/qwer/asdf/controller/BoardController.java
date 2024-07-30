@@ -11,6 +11,7 @@ import qwer.asdf.entities.Board;
 import qwer.asdf.services.BoardService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/boards")
